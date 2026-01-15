@@ -69,12 +69,13 @@
 
     <div class="container">
         <h3>🎓 Chào mừng sinh viên mới</h3>
-
+        
         <div class="info"><span>Họ và tên:</span> <?php echo $_POST["name"]; ?></div>
         <div class="info"><span>SĐT:</span> <?php echo $_POST["phone"]; ?></div>
         <div class="info"><span>Email:</span> <?php echo $_POST["email"]; ?></div>
         <div class="info"><span>Tuổi:</span> <?php echo $_POST["age"]; ?></div>
-        <div class="info"><span>Ngày sinh:</span> <?php echo $_POST["birthday"]; ?></div>
+        <?php $date = date_create($_POST["birthday"]); ?>
+        <div class="info"><span>Ngày sinh:</span> <?php echo date_format($date,"d/m/Y"); ?></div>
         <div class="info"><span>Giới tính:</span> <?php echo $_POST["gender"]; ?></div>
         <div class="info"><span>Địa chỉ:</span> <?php echo $_POST["address"]; ?></div>
         <div class="info"><span>Trường cấp 3:</span> <?php echo $_POST["school"]; ?></div>
@@ -85,13 +86,13 @@
 
         <?php
         $myfile = fopen("thongtinsinhvien.txt", "a") or die("Không thể mở file!");
-
+        $date = date_create($_POST["birthday"]);
         $txt =
             "Họ tên: " . $_POST["name"] . "\n" .
             "SĐT: " . $_POST["phone"] . "\n" .
             "Email: " . $_POST["email"] . "\n" .
             "Tuổi: " . $_POST["age"] . "\n" .
-            "Ngày sinh: " . $_POST["birthday"] . "\n" .
+            "Ngày sinh: " . date_format($date,"d/m/Y") . "\n" .
             "Giới tính: " . $_POST["gender"] . "\n" .
             "Địa chỉ: " . $_POST["address"] . "\n" .
             "Trường cấp 3: " . $_POST["school"] . "\n" .
