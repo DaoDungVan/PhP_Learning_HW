@@ -107,6 +107,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+
+    // ===== KIỂM TRA TRÙNG MSSV (TRỪ CHÍNH NÓ) =====
+    if ($mssvErr == "") {
+        $stmt = $conn->prepare("SELECT id FROM students WHERE mssv = ? AND id != ?");
+        $stmt->bind_param("si", $mssv, $id);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $mssvErr = "MSSV đã tồn tại";
+        }
+        $stmt->close();
+    }
+
+    // ===== KIỂM TRA TRÙNG SĐT =====
+    if ($phoneErr == "") {
+        $stmt = $conn->prepare("SELECT id FROM students WHERE phone = ? AND id != ?");
+        $stmt->bind_param("si", $phone, $id);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $phoneErr = "Số điện thoại đã tồn tại";
+        }
+        $stmt->close();
+    }
+
+    // ===== KIỂM TRA TRÙNG EMAIL =====
+    if ($emailErr == "") {
+        $stmt = $conn->prepare("SELECT id FROM students WHERE email = ? AND id != ?");
+        $stmt->bind_param("si", $email, $id);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $emailErr = "Email đã tồn tại";
+        }
+        $stmt->close();
+    }
+
+
+
     // ===== ĐỊA CHỈ =====
     if (empty($_POST["address"])) {
         $addressErr = "Không được bỏ trống địa chỉ";
@@ -161,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Cập nhật sinh viên</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/216266/manager-occupation.svg"/>
+    <link rel="icon" type="image/x-icon" href="https://www.svgrepo.com/show/216266/manager-occupation.svg" />
     <style>
         span.error {
             color: red;
