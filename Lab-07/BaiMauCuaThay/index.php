@@ -18,6 +18,16 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+
+        .button-gender {
+            background-color: #2196F3;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            margin: 4px 2px;
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -49,15 +59,45 @@
     $limit = 10;
     $page = $_GET['page'] ?? 1;
     $offset = ($page - 1) * $limit;
-    $gender = $_GET['gender'];
-    $keyword = "Thị";
+    // Undefined array key gender
+    // $gender = $_GET['gender'];
+    $gender = $_GET['gender'] ?? null;
+    // code bị gắn cứng
+    // $keyword = "Thị";
+    $keyword = $_GET['keyword'] ?? "";
 
-    $sql = "SELECT id, name, gender FROM students limit $limit offset $offset";
+    // $sql = "SELECT id, name, gender FROM students limit $limit offset $offset";
 
 
     //%Thị%
-    if ($gender) {
-        $sql = "SELECT id, name, gender FROM students WHERE gender = $gender and name LIKE '%$keyword%' limit $limit offset $offset";
+    // if ($gender) {
+    //     $sql = "SELECT id, name, gender FROM students WHERE gender = $gender and name LIKE '%$keyword%' limit $limit offset $offset";
+    // }
+
+    if ($gender !== null) {
+
+        $stmt = $conn->prepare(
+            "SELECT id, name, gender 
+         FROM students 
+         WHERE gender = ? 
+         AND name LIKE ?
+         LIMIT ? OFFSET ?"
+        );
+
+        $search = "%$keyword%";
+        $stmt->bind_param("isii", $gender, $search, $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    } else {
+
+        $stmt = $conn->prepare(
+            "SELECT id, name, gender 
+         FROM students 
+         LIMIT ? OFFSET ?"
+        );
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
     }
 
     $result = $conn->query($sql);
@@ -74,9 +114,12 @@
     ?>
 
     <div class="pagination">
-        <a class="button" href="index.php?page=1">1</a>
+        <!-- <a class="button" href="index.php?page=1">1</a>
         <a class="button" href="index.php?page=2">2</a>
-        <a class=" button" href="index.php?page=3">3</a>
+        <a class=" button" href="index.php?page=3">3</a> -->
+        <a class="button" href="index.php?page=1&gender=<?= $gender ?>&keyword=<?= $keyword ?>">1</a>
+        <a class="button" href="index.php?page=2&gender=<?= $gender ?>&keyword=<?= $keyword ?>">2</a>
+        <a class="button" href="index.php?page=3&gender=<?= $gender ?>&keyword=<?= $keyword ?>">3</a>
     </div>
 </body>
 
