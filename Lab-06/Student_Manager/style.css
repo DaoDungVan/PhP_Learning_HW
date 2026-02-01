@@ -1,0 +1,197 @@
+/* ================= RESET ================= */
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 98%;
+    max-width: 1400px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 30px 28px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    overflow-x: hidden; 
+}
+
+/* ================= TITLE ================= */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-size: 28px;
+}
+
+/* ================= BUTTON & LINK ================= */
+a.btn,
+button {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s ease-in-out;
+}
+
+/* Button colors */
+.btn-add {
+    background: #4a90e2;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.btn-edit {
+    background: #f5a623;
+    color: #fff;
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.btn-back {
+    background: #7f8c8d;
+    color: #fff;
+}
+
+button {
+    background: #2ecc71;
+    color: #fff;
+}
+
+a.btn:hover,
+button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+/* ================= FORM ================= */
+form label {
+    font-weight: 600;
+    display: block;
+    margin-top: 14px;
+    font-size: 15px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 11px 12px;
+    margin-top: 6px;
+    border-radius: 9px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.2s;
+    font-size: 15px;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.15);
+}
+
+/* Radio group */
+.radio-group {
+    margin-top: 6px;
+    font-size: 15px;
+}
+
+.radio-group input {
+    width: auto;
+    margin-right: 6px;
+}
+
+/* Error message */
+span.error {
+    color: red;
+    font-size: 14px;
+}
+
+/* ================= TABLE ================= */
+/* ================= TABLE FULL WIDTH ================= */
+.table-wrapper {
+    width: 100%;
+    padding: 0 20px; /* khoảng cách 2 bên */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* cột tự giãn */
+    font-size: 16px; /* chữ to hơn */
+    background: #fff;
+}
+
+/* ô bảng */
+table th,
+table td {
+    padding: 14px 12px;   /* rộng hơn */
+    border: 1px solid #ddd;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+/* header */
+table th {
+    background: #5d95d1;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* dòng */
+table tr:nth-child(even) {
+    background: #f8fbff;
+}
+
+table tr:hover {
+    background: #eaf2ff;
+}
+
+/* cột hành động */
+.action-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+/* nút */
+.btn-edit,
+.btn-delete {
+    padding: 8px 16px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1000px) {
+    table th,
+    table td {
+        font-size: 13px;
+        padding: 9px 7px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .container {
+        padding: 18px;
+    }
+}
